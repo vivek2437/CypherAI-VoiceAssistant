@@ -21,10 +21,4 @@ CypherAI is a voice-controlled virtual assistant powered by Python, OpenAI's GPT
 - Internet connection
 - Windows OS (uses `win32com.client`)
 
-### Installation
 
-1. Clone this repository:
-
-```bash
-git clone https://github.com/your-username/CypherAI-VoiceAssistant.git
-cd CypherAI-VoiceAssistant
