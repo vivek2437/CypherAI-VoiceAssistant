@@ -1,24 +1,25 @@
-# CypherAI - Voice Assistant 🔊🤖
+# 🧠 Cypher AI - Voice Assistant using Python
 
-CypherAI is a voice-controlled virtual assistant powered by Python, OpenAI's GPT-3.5, and Windows Speech APIs. It can recognize spoken commands, answer queries via AI, open popular websites, and tell the current time.
+⚠️ **This project is currently under development. Expect frequent updates and feature enhancements.**
 
-> ⚠️ This project is currently under development. Expect frequent updates and feature enhancements.
+Cypher AI is a voice-based assistant that can:
+- Recognize spoken commands
+- Open popular websites like YouTube and Google
+- Tell the current time
+- Respond intelligently using Google's Gemini API
 
-## 🧠 Features
+## 🚀 Features
 
-- 🎙 Voice command recognition (via microphone)
-- 🔗 Open websites like YouTube, Google, Stack Overflow
-- 🕒 Tell the current time
-- 🧠 AI-based query handling using OpenAI GPT-3.5
-- 🗣 Windows native text-to-speech output
+- 🎤 Voice Recognition via `speech_recognition`
+- 🗣️ Text-to-Speech via Windows SAPI
+- 🌐 Web browsing integration
+- 🧠 AI replies using Gemini API (Google)
 
-## 🚀 Getting Started
-
-### Prerequisites
+## 📦 Requirements
 
 - Python 3.7+
-- A working microphone
-- Internet connection
-- Windows OS (uses `win32com.client`)
-
-
+- `speech_recognition`
+- `pyaudio`
+- `pywin32`
+- `requests`
+- Microphone & Internet connection
