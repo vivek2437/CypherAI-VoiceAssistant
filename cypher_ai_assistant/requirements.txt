@@ -1,5 +1,5 @@
+Flask
+flask-cors
 SpeechRecognition
 pywin32
 requests
-pyaudio
-Microphone & Internet connection
