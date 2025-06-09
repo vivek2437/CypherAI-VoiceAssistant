@@ -1,5 +1,14 @@
 # server.py
 
+
+import sys
+import os
+
+# Get the absolute path to the parent directory (where core/ is)
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from core.speech_engine import say
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from core.speech_engine import say
