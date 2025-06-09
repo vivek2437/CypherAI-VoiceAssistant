@@ -1,7 +1,9 @@
-import win32com.client
+import pyttsx3
 
-speaker = win32com.client.Dispatch("SAPI.SpVoice")
+# Initialize the pyttsx3 engine
+engine = pyttsx3.init()
 
 def say(text: str):
-    """Speak out the given text using the Windows SAPI text-to-speech engine."""
-    speaker.Speak(text)
+    """Speak out the given text using pyttsx3 (cross-platform TTS engine)."""
+    engine.say(text)
+    engine.runAndWait()
