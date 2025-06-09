@@ -1,43 +1,45 @@
-# server.py
-
-
-import sys
-import os
-
-# Get the absolute path to the parent directory (where core/ is)
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from core.speech_engine import say
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from core.speech_engine import say
-from core.recognizer import takec
-from core.gemini_api import ask_gemini
+import speech_recognition as sr
+from gtts import gTTS
+import os
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS so Lovable can call your API
+CORS(app)
 
-@app.route("/api/speak", methods=["POST"])
-def speak():
-    text = request.json.get("text", "")
-    say(text)
-    return jsonify({"status": "spoken", "text": text})
-
-@app.route("/api/listen", methods=["GET"])
-def listen():
-    text = takec()
-    return jsonify({"text": text})
-
-@app.route("/api/ai", methods=["POST"])
-def ai_reply():
-    prompt = request.json.get("prompt", "")
-    reply = ask_gemini(prompt)
-    return jsonify({"reply": reply})
-
-@app.route("/")
+@app.route('/', methods=['GET'])
 def home():
-    return "Cypher AI Assistant API is running."
+    return "Voice Assistant API is running."
 
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route('/speak', methods=['POST'])
+def speak():
+    data = request.json
+    if 'text' not in data:
+        return jsonify({'error': 'Missing "text" field in request.'}), 400
+    
+    text = data['text']
+    tts = gTTS(text=text, lang='en')
+    filename = "output.mp3"
+    tts.save(filename)
+    
+    return jsonify({'message': f'Successfully converted to speech: {text}', 'audio_file': filename})
+
+@app.route('/listen', methods=['GET'])
+def listen():
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        audio = recognizer.listen(source)
+
+    try:
+        command = recognizer.recognize_google(audio)
+        return jsonify({'transcript': command})
+    except sr.UnknownValueError:
+        return jsonify({'error': 'Could not understand audio'}), 400
+    except sr.RequestError as e:
+        return jsonify({'error': str(e)}), 500
+
+if __name__ == '__main__':
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
