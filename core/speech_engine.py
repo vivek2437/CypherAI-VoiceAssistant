@@ -1,9 +1,7 @@
-import pyttsx3
+from gtts import gTTS
+import os
 
-# Initialize the pyttsx3 engine
-engine = pyttsx3.init()
-
-def say(text: str):
-    """Speak out the given text using pyttsx3 (cross-platform TTS engine)."""
-    engine.say(text)
-    engine.runAndWait()
+def say(text):
+    tts = gTTS(text)
+    tts.save("response.mp3")
+    os.system("mpg123 response.mp3")  # or use any MP3 player
