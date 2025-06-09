@@ -3,4 +3,3 @@ flask-cors
 SpeechRecognition
 pywin32
 requests
-pip freeze > requirements.txt
