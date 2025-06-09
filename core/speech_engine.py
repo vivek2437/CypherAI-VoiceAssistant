@@ -1,7 +1,7 @@
-from gtts import gTTS
-import os
+import win32com.client
 
-def say(text):
-    tts = gTTS(text)
-    tts.save("response.mp3")
-    os.system("mpg123 response.mp3")  # or use any MP3 player
+speaker = win32com.client.Dispatch("SAPI.SpVoice")
+
+def say(text: str):
+    """Speak out the given text using the Windows SAPI text-to-speech engine."""
+    speaker.Speak(text)
