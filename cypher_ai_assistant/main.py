@@ -6,7 +6,7 @@ from core.utils import get_current_time
 
 def main():
     say("Hello Sir, I am Cypher AI.")
-    
+
     while True:
         text = takec()
 
